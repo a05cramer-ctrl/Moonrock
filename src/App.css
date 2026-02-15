@@ -393,6 +393,8 @@
   font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .cta-primary {
@@ -623,6 +625,9 @@
 .community-btn {
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, var(--accent-green) 0%, #00cc6a 100%);
+  text-decoration: none;
+  display: inline-block;
+  color: var(--space-dark);
   border: none;
   border-radius: 10px;
   color: var(--space-dark);

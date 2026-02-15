@@ -1,7 +1,30 @@
+import { useState } from 'react'
 import './App.css'
 import moonrockLogo from './moonrock phtot.png'
 
+const CONTRACT_ADDRESS = 'HTMrdP8nLM4rT88e7KThLznBmf6S15mBfxoTvKoNpump'
+
 function App() {
+  const [copied, setCopied] = useState(false)
+
+  const copyContractAddress = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTRACT_ADDRESS)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Fallback: select and copy
+      const input = document.createElement('input')
+      input.value = CONTRACT_ADDRESS
+      document.body.appendChild(input)
+      input.select()
+      document.execCommand('copy')
+      document.body.removeChild(input)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
   return (
     <div className="moonrock-site">
       {/* Space background layers */}
@@ -77,7 +100,9 @@ function App() {
           <a href="#roadmap">Flight Phases</a>
           <a href="#community">Smoke Circle</a>
         </div>
-        <button className="nav-cta">COPY CA</button>
+        <button className="nav-cta" onClick={copyContractAddress}>
+          {copied ? 'Copied!' : 'COPY CA'}
+        </button>
       </nav>
 
       {/* Hero Section */}
@@ -98,8 +123,17 @@ function App() {
           Join the crew before we blast off. No cap. 🌙
         </p>
         <div className="hero-ctas">
-          <button className="cta cta-primary">Ignite the Rocket</button>
-          <button className="cta cta-secondary">Light the Launch</button>
+          <button className="cta cta-primary" onClick={copyContractAddress}>
+            {copied ? 'Copied!' : 'Ignite the Rocket'}
+          </button>
+          <a 
+            href="https://x.com/MoonRock_dev" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="cta cta-secondary"
+          >
+            Light the Launch
+          </a>
         </div>
         <div className="hero-ticker">
           <span>$MOONROCK</span>
@@ -162,7 +196,14 @@ function App() {
             <div className="community-icon">🐦</div>
             <h3>Twitter / X</h3>
             <p>Dank memes and launch updates</p>
-            <button className="community-btn">Follow</button>
+            <a 
+              href="https://x.com/MoonRock_dev" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="community-btn"
+            >
+              Follow
+            </a>
           </div>
         </div>
       </section>
